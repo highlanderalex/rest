@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>AutoMagazin</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="resources/css/style.css">
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.js"></script>
+	<script type="text/javascript" src="resources/js/myscript.js"></script>
+</head>
+
+<body>
+<div id="container">
+	<div id="header_my"></div>
+	<div id="main">
+		<div id="mn" style="float:left;width:200px;margin:0 auto;margin-top:10px">
+			<div class="menu"><p align="center"><a href="api/shop/auto/allAuto"> <!--onclick="getAllAuto();return false"--> Main</a></p></div>
+			<div class="menu"><p align="center"><a href="api/1.jpg">Enter</a></p></div>
+			<div class="menu"><p align="center"><a href="api/1.jpg">Adminka</a></p></div>
+			<div id="search" align="center">
+			<h4>Search</h4>
+			
+			<table width="190px">
+			<tr>
+			<td width="90px">Model</td>
+			<td width="90px"><select name="model" class="search">
+				<option value="320">320</option>
+				<option value="330">330</option>
+				<option value="520">520</option>
+				<option value="E220">E220</option>
+				<option value="E280">E280</option>
+				<option value="E320">E320</option>
+				<option value="S500">S500</option>
+				<option value="GS">GS</option>
+				<option value="RX">RX</option>
+			</select></td></tr>
+			<tr>
+			<td>Color</td>
+			<td><select name="color" class="search">
+				<option value="white">White</option>
+				<option value="black">Black</option>
+				<option value="red">Red</option>
+			</select></td></tr>
+			<tr>
+			<td>Year</td>
+			<td><select name="year" class="search">
+				<option value="2002">2002</option>
+				<option value="2003">2003</option>
+				<option value="2004">2004</option>
+				<option value="2005">2005</option>
+				<option value="2006">2006</option>
+				<option value="2007">2007</option>
+				<option value="2008">2008</option>
+			</select></td></tr>
+			<tr>
+			<td>Speed</td>
+			<td><select name="speed" class="search">
+			<option value="150">150</option>
+			<option value="180">180</option>
+			<option value="200">200</option>
+			<option value="210">210</option>
+			</select></td></tr>
+			<tr>
+			<td>Volume</td>
+			<td><select name="volume" class="search">
+				<option value="2000">2000</option>
+				<option value="2500">2500</option>
+				<option value="2800">2800</option>
+				<option value="3000">3000</option>
+				<option value="3500">3500</option>
+			</select></td></tr>
+			<tr>
+			<td>Price</td>
+			<td><select name="price" class="search">
+			
+				<option value="15000">15000</option>
+				<option value="18000">18000</option>
+				<option value="20000">20000</option>
+				<option value="25000">25000</option>
+				<option value="35000">35000</option>
+				<option value="40000">40000</option>
+			
+			</select></td>
+			</tr></table><br />
+			<button class="btn btn-default">Search</button>
+			</div>
+		</div>
+		
+		<div id="right_block" style="float:left;width:950px;margin:0 auto;margin-left:20px;margin-top:10px;min-height:650px;">
+			Result
+		</div>
+	</div>
+</div>
+<div id="footer_my" class="clear"><p align="center">&copy; 2015 highlanderalex</p></div>
+</body>
+</html>
