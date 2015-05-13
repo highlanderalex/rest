@@ -1,25 +1,32 @@
 $(document).ready(function(){
-	 /*$('.orders').click(function(e){
-		$(this).find('.foods').fadeIn(500);
-		var _this=this;
-			$.ajax({
-				type: 'GET',
-				url: 'libs/func/ajaxquery.php?id=' + $(this).attr('idorder'),
-				dataType: 'json',
-				success: function(data)
-				  {
-					$(_this).find('.foods').empty();
-					$.each(data, function(key, obj){
-						$(_this).find('.foods').append('Название ' + obj.name + ' ' + obj.qty + 'шт. Цена ' + obj.price + ' грн.<br />');
-					});
-				  }
-			});
-		});*/
-		getAllAuto();
+    	getAllAuto();
 	 });
 
 function getAllAuto(){
 	$('#right_block').empty();
-	str = '<div align="center">All Cars</div>';
+    str = '';
+    $.ajax({
+        type:'GET',
+        url:'/~user4/PHP/rest/client/api/auto/allAuto',
+        dataType:'json',
+        success:function(data)
+        {
+            $.each(data, function(key,obj){
+            $('#right_block').append('id' + obj.id + 'model' + obj.model + 'desc' + obj.description +
+                    'price' + obj.price + 'image' + obj.image + '<br />');    
+           });
+        }
+    });
+}
+
+function loginPage(){
+	$('#right_block').empty();
+	str = '<div align="center"><h2>Page LOGIN</h2></div>';
+	$('#right_block').append(str);
+}
+
+function adminPage(){
+	$('#right_block').empty();
+	str = '<div align="center"><h2>Page ADMIN</h2></div>';
 	$('#right_block').append(str);
 }
