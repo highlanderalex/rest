@@ -48,24 +48,27 @@
 			if(!empty($res))
 			{
 				return $res;
+				//echo json_encode($res);
 			}
 			else
 			{
-				throw new SoapFault('Server', 'ID auto do not exist');
+				//throw new SoapFault('Server', 'ID auto do not exist');
+				return false;
 			}
         }
 		
-		public function getInfoAuto($id)
+		public function detailInfoAction($id=5)
         {
 			$model = new AutoModel();
             $res = $model->returnInfoAuto($id);
 			if(!empty($res))
 			{
-				return (object)$res;
+				//return $res;
+				echo json_encode($res);
 			}
 			else
 			{
-				throw new SoapFault('Server', 'ID auto do not exist');
+				return false;
 			}
         }
 		

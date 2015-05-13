@@ -2,6 +2,6 @@
 	define ("HOST","localhost");
 	define ("DBNAME","user4");
 	define ("DBDRIVER","mysql");
-	define ("LOGIN","user4");
-	define ("PASS","tuser4");
+	define ("LOGIN","root");
+	define ("PASS","");
 	define ("ENC_DATA","json");

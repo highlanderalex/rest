@@ -40,7 +40,7 @@
 		public function returnInfoAuto($id)
         {
 			$arr['where'] = $id;
-            $res = $this->inst->Select('color, year, price, model, speed, volume')
+            $res = $this->inst->Select('color, year, price, model, speed, volume, image, id')
                               ->From('a_auto')
 							  ->Where('id=')
 							  ->Execute($arr);
