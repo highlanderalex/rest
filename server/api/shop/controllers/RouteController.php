@@ -20,12 +20,12 @@
 			//user/get/id/1
 			$splits = explode('/',trim($request,'/'));
 			//Выбор контроллера
-			$this->_controller = !empty($splits[4])?ucfirst($splits[4]).'Controller':'AutoController';
+			$this->_controller = !empty($splits[5])?ucfirst($splits[5]).'Controller':'AutoController';
 			//Выбор экшена
-			$this->_action = !empty($splits[5])?$splits[5].'Action':'allAutoAction';
-			if(!empty($splits[6]))
+			$this->_action = !empty($splits[6])?$splits[6].'Action':'allAutoAction';
+			if(!empty($splits[7]))
 			{
-				self::$_params = $splits[6];
+				self::$_params = $splits[7];
 			}
 		}
 		

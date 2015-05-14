@@ -1,6 +1,6 @@
 RewriteEngine On
-#RewriteBase /~user4/PHP/rest/server/api/shop
-RewriteBase /rest/server/api/shop
+RewriteBase /~user4/PHP/rest/server/api/shop
+#RewriteBase /rest/server/api/shop
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule !\.(js|gif|png|jpg|css)$ index.php 

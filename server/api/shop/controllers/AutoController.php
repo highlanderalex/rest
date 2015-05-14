@@ -3,6 +3,7 @@
 	require_once (dirname(__FILE__).'/../models/CategoryModel.php');
 	require_once (dirname(__FILE__).'/../models/AutoModel.php');
 	require_once (dirname(__FILE__).'/../models/OrderModel.php');
+	require_once ('controllers/RouteController.php');
 
     class AutoController 
 	{
@@ -57,8 +58,9 @@
 			}
         }
 		
-		public function detailInfoAction($id=5)
+		public function detailInfoAction()
         {
+            $id = RouteController::getParams();
 			$model = new AutoModel();
             $res = $model->returnInfoAuto($id);
 			if(!empty($res))
