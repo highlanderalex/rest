@@ -48,17 +48,17 @@
             return $res; 
         }
 		
-		public function returnSearchResult($obj)
+		public function returnSearchResult($data)
         {
-			$arr['where'] = $obj->model;
+			$arr['where'] = $data['model'];
             $res = $this->inst->Select('id')
                               ->From('a_auto')
 							  ->Where('model=')
-							  ->A('year=', $obj->year)
-							  ->A("color='", $obj->color. "'")
-							  ->A('volume=', $obj->volume)
-							  ->A('price=', $obj->price)
-							  ->A('speed=', $obj->speed)
+							  ->A('year=', $data['year'])
+							  ->A("color='", $data['color']. "'")
+							  ->A('volume=', $data['volume'])
+							  ->A('price=', $data['price'])
+							  ->A('speed=', $data['speed'])
 							  ->Execute($arr);
 			$res = $this->inst->dbResultToArray($res);
             return $res; 

@@ -74,17 +74,25 @@
 			}
         }
 		
-		public function getSearchResult($obj)
+		public function getSearchAction()
         {
+            $data['model'] = $_POST['model'];
+            $data['color'] = $_POST['color'];
+            $data['speed'] = $_POST['speed'];
+            $data['volume'] = $_POST['volume'];
+            $data['price'] = $_POST['price'];
+            $data['year'] = $_POST['year'];
 			$model = new AutoModel();
-            $res = $model->returnSearchResult($obj);
+            $res = $model->returnSearchResult($data);
 			if(!empty($res))
 			{
-				return $res;
+				//return $res;
+				echo json_encode($res);
 			}
 			else
 			{
-				throw new SoapFault('Server', 'Search return empty');
+				$res['error'] = 1;
+				echo json_encode($res);
 			}
         }
 		

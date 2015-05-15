@@ -76,10 +76,33 @@ function getSearch(){
     speed = $('select[name=speed]').val();
     volume = $('select[name=volume]').val();
     price = $('select[name=price]').val();
+	$('#right_block').empty();
 	str = '<div align="center"><h2>Result Search</h2></div>';
-    str += model + ' ' + year + ' ' + color + ' ' + speed + ' ' + volume + ' ' + price;
-    $('#right_block').empty();
-    $('#right_block').append(str);
+    $('#right_block').append(str);	
+    $.ajax({
+        type:'POST',
+        //url:'/rest/server/api/shop/auto/detailInfo/' + id,
+        url:'/~user4/PHP/rest/client/api/auto/getSearch/',
+        data:'model=' + model + '&year=' + year + '&color=' + color + '&speed=' + speed + '&volume=' + volume + '&price=' + price,
+        dataType:'json',
+        success:function(data)
+        {
+            if (data.error == 1)
+            {
+	            str = '<div align="center"><h5>Result return empty</h5></div>'; 
+                $('#right_block').append(str);
+                return;
+            }
+            else
+            {
+                $.each(data, function(key, obj){
+                    
+                    $('#right_block').append('<a href="" onclick="detailInfo(' + obj.id +');return false;">Result</a><br />');
+                });
+            }
+        }
+    });
+    
 
 }
 
