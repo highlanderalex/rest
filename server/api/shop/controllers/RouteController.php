@@ -1,11 +1,13 @@
 <?php
-	//error_reporting( E_ALL );
-	//ini_set("display_errors", 1);
 	
 	class RouteController
 	{
-		protected $_controller, $_action;
-		static $_instance, $_body, $_params;
+		protected $controller;
+		protected $action;
+		static $_instance;
+		static $params;
+		static $format;
+		static $view;
 		
 		public static function getInstance()
 		{
@@ -17,16 +19,16 @@
 		private function __construct()
 		{
 			$request = $_SERVER['REQUEST_URI'];
-			//user/get/id/1
 			$splits = explode('/',trim($request,'/'));
-			//Выбор контроллера
-			$this->_controller = !empty($splits[5])?ucfirst($splits[5]).'Controller':'AutoController';
-			//Выбор экшена
-			$this->_action = !empty($splits[6])?$splits[6].'Action':'allAutoAction';
-			if(!empty($splits[7]))
+			$this->controller = !empty($splits[PATH]) ? ucfirst($splits[PATH]).'Controller' : 'AutoController';
+			$this->action = !empty($splits[PATH + 1]) ? $splits[PATH + 1].'Action' : 'allAutoAction';
+			if(!empty($splits[PATH + 2]))
 			{
-				self::$_params = $splits[7];
+				self::$params = $splits[PATH + 2];
 			}
+			$ext = substr(strstr($request, '.'), 1);
+			self::$format = (!empty($ext)) ? $ext : ENC_DATA;
+			self::$view = new View();
 		}
 		
 		public function run()
@@ -42,54 +44,31 @@
 				}
 				else
 				{
-					self::setBody("<img src='http://hq-wallpapers.ru/wallpapers/4/hq-wallpapers_ru_computer_17752_1920x1200.jpg'/>");
+					self::$view->getError(404); 
 				}
 			}
 			else
 			{
-				self::setBody("<img src='http://hq-wallpapers.ru/wallpapers/4/hq-wallpapers_ru_computer_17752_1920x1200.jpg'/>");
+				self::$view->getError(404);
 			}
-		}
-		
-		public static function render($file,$replace='')
-		{
-			ob_start();
-			$test = $replace;
-			include(__DIR__.'/'.$file);
-			return ob_get_clean();
-		}
-		
-		public static function templateRender($file, $arr)
-		{
-			foreach($arr as $key=>$val)
-			{
-				$file = str_replace($key, $val, $file);
-			}
-			return $file;
 		}
 		
 		public static function getParams()
 		{
-			return self::$_params;
+			return self::$params;
+		}
+		
+		public static function getFormat()
+		{
+			return self::$format;
 		}
 		
 		function getController()
 		{
-			return $this->_controller;
+			return $this->controller;
 		}
 		function getAction()
 		{
-			return $this->_action;
-		}
-		
-		function getBody()
-		{
-			return self::$_body;
-		}
-		
-		public static function setBody($body)
-		{
-			self::$_body = $body;
-			return self::$_body;
+			return $this->action;
 		}
 	}

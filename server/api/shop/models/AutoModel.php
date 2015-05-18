@@ -13,7 +13,7 @@
       
         public function returnAllAuto()
         {
-            $res = $this->inst->Select('a.id, a.description, a.price, a.model, a.image, c.titleCat')
+            $res = $this->inst->Select('a.id, a.description, a.price, a.model, a.image, c.titleCat, a.color, a.year')
                               ->From('a_auto a')
                               ->Left()
 							  ->Join('a_categories c')
@@ -48,6 +48,44 @@
             return $res; 
         }
 		
+		public function checkAutoOrder($id)
+        {
+			$arr['where'] = $id;
+            $res = $this->inst->Select('COUNT(idAuto) as val')
+                              ->From('a_orders')
+							  ->Where('idAuto=')
+							  ->Execute($arr);
+			$res = $this->inst->dbCount($res);
+            return $res; 
+        }
+		
+		public function deleteAuto($id)
+        {
+			$arr['where'] = $id;
+            $res = $this->inst->Delete()
+                              ->From('a_auto')
+							  ->Where('id=')
+							  ->Limit(1)
+							  ->Execute($arr);
+            return $res; 
+        }
+		
+		public function updateAuto($data)
+        {
+			$arr['where'] = $data['id'];
+			$color = $data['color'];
+			$year = $data['year'];
+			$model = $data['model'];
+			$price = $data['price'];
+			$image = $data['image'];
+            $res = $this->inst->Update('a_auto')
+						      ->Set("color='" . $color . "', model='" . $model . "', image='" . $image . "', year='" . $year . "', price=" . $price)
+							  ->Where('id=')
+							  ->Limit(1)
+							  ->Execute($arr);
+            return $res;
+        }
+		
 		public function returnSearchResult($data)
         {
 			$arr['where'] = $data['model'];
@@ -59,28 +97,6 @@
 							  ->A('volume=', $data['volume'])
 							  ->A('price=', $data['price'])
 							  ->A('speed=', $data['speed'])
-							  ->Execute($arr);
-			$res = $this->inst->dbResultToArray($res);
-            return $res; 
-        }
-		
-		public function returnImage($id)
-        {
-			$arr['where'] = $id;
-            $res = $this->inst->Select('image')
-                              ->From('a_auto')
-							  ->Where('id=')
-							  ->Execute($arr);
-			$res = $this->inst->dbLineArray($res);
-            return $res; 
-        }
-		
-		public function returnGalary($id)
-        {
-			$arr['where'] = $id;
-            $res = $this->inst->Select('image')
-                              ->From('a_galary')
-							  ->Where('idAuto=')
 							  ->Execute($arr);
 			$res = $this->inst->dbResultToArray($res);
             return $res; 
